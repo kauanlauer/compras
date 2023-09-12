@@ -3,13 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const addItemButton = document.getElementById("add-item");
     const itemInput = document.getElementById("item");
     const totalSpan = document.getElementById("total");
-    const resetButton = document.getElementById("reset-list"); // Botão de reset
+    const resetButton = document.getElementById("reset-list");
+    const saveListButton = document.getElementById("save-list");
 
-    // Carregar a lista salva no localStorage, se existir
-    const savedList = JSON.parse(localStorage.getItem("shoppingList")) || [];
-    savedList.forEach(function (savedItem) {
-        addItemToList(savedItem);
-    });
+    // Função para carregar a lista de compras salva no localStorage
+    function loadShoppingList() {
+        const savedList = JSON.parse(localStorage.getItem("shoppingList")) || [];
+        savedList.forEach(function (savedItem) {
+            addItemToList(savedItem);
+        });
+    }
+
+    // Carregue a lista de compras ao carregar a página
+    loadShoppingList();
 
     addItemButton.addEventListener("click", function () {
         const item = itemInput.value.trim().toUpperCase();
@@ -50,6 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     itemList.addEventListener("input", function () {
         calcularTotal();
+        salvarLista();
+    });
+
+    saveListButton.addEventListener("click", function () {
+        // Função para salvar a lista no cache do navegador
         salvarLista();
     });
 

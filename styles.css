@@ -116,3 +116,20 @@ span {
 li.comprado .item-name {
     text-decoration: line-through; /* Adicionar linha no meio do texto */
 }
+
+/* Estilizar o rodapé */
+footer {
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff; /* Cor de fundo */
+    opacity: 0.7; /* Opacidade para torná-lo discreto */
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px; /* Tamanho da fonte menor para torná-lo discreto */
+    color: #333; /* Cor do texto discreta */
+}
