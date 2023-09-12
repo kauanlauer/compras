@@ -22,14 +22,18 @@ document.addEventListener("DOMContentLoaded", function () {
             // Adicionar um ouvinte de evento ao nome do item para marcar como "comprado"
             const itemName = listItem.querySelector(".item-name");
 
-            itemName.addEventListener("click", function () {
+            itemName.addEventListener("click", function (event) {
+                event.stopPropagation(); // Impedir que o clique no nome afete a marcação como "comprado"
                 listItem.classList.toggle("comprado");
-                calcularTotal();
             });
 
             // Recalcular o total após adicionar um item
             calcularTotal();
         }
+    });
+
+    itemList.addEventListener("input", function () {
+        calcularTotal();
     });
 
     function calcularTotal() {
