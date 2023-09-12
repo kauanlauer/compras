@@ -4,13 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const itemInput = document.getElementById("item");
     const totalSpan = document.getElementById("total");
     const resetButton = document.getElementById("reset-list");
-    const saveListButton = document.getElementById("save-list");
+    const saveButton = document.getElementById("save-list"); // Botão de salvar
 
     // Função para carregar a lista de compras salva no localStorage
     function loadShoppingList() {
         const savedList = JSON.parse(localStorage.getItem("shoppingList")) || [];
         savedList.forEach(function (savedItem) {
-            addItemToList(savedItem);
+            addItemToList(savedItem.name, savedItem.bought);
         });
     }
 
@@ -26,17 +26,17 @@ document.addEventListener("DOMContentLoaded", function () {
             // Limpar o campo após adicionar o item
             itemInput.value = "";
 
-            // Adicionar um ouvinte de evento ao nome do item para marcar como "comprado"
-            const itemName = listItem.querySelector(".item-name");
+            // Adicionar um ouvinte de evento ao botão "Comprado" para alternar o estado
+            const boughtButton = listItem.querySelector(".bought-button");
 
-            itemName.addEventListener("click", function (event) {
-                event.stopPropagation(); // Impedir que o clique no nome afete a marcação como "comprado"
-                listItem.classList.toggle("comprado");
-                salvarLista();
+            boughtButton.addEventListener("click", function (event) {
+                event.stopPropagation(); // Impedir que o clique no botão afete a marcação como "comprado"
+                toggleBought(listItem);
             });
 
             // Recalcular o total após adicionar um item
             calcularTotal();
+            salvarLista();
         }
     });
 
@@ -59,20 +59,30 @@ document.addEventListener("DOMContentLoaded", function () {
         salvarLista();
     });
 
-    saveListButton.addEventListener("click", function () {
-        // Função para salvar a lista no cache do navegador
+    saveButton.addEventListener("click", function () {
         salvarLista();
     });
 
-    function addItemToList(itemName) {
+    function addItemToList(itemName, bought = false) {
         const listItem = document.createElement("li");
         listItem.innerHTML = `
             <span class="item-name">${itemName}</span>
             <input type="number" step="1" placeholder="Qtd" class="quantity-input">
             <input type="number" step="0.01" placeholder="R$" class="price-input">
+            <button class="bought-button">${bought ? "✔" : ""}</button> <!-- Use o símbolo de marca de seleção se estiver "comprado" -->
         `;
+
+        if (bought) {
+            listItem.classList.add("comprado");
+        }
+
         itemList.appendChild(listItem);
         return listItem;
+    }
+
+    function toggleBought(listItem) {
+        listItem.classList.toggle("comprado");
+        salvarLista();
     }
 
     function calcularTotal() {
@@ -99,7 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         itemsList.forEach(function (item) {
             const itemName = item.querySelector(".item-name").textContent;
-            items.push(itemName);
+            const isBought = item.classList.contains("comprado");
+            items.push({ name: itemName, bought: isBought });
         });
 
         localStorage.setItem("shoppingList", JSON.stringify(items));
