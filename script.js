@@ -6,42 +6,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addItemButton.addEventListener("click", function () {
         const item = itemInput.value.trim().toUpperCase();
-        const quantityInput = document.createElement("input");
-        quantityInput.type = "number";
-        quantityInput.step = "1";
-        quantityInput.placeholder = "Qtd";
-        quantityInput.classList.add("quantity-input");
-
-        const priceInput = document.createElement("input");
-        priceInput.type = "number";
-        priceInput.step = "0.01";
-        priceInput.placeholder = "R$";
-        priceInput.classList.add("price-input");
 
         if (item !== "") {
             const listItem = document.createElement("li");
             listItem.innerHTML = `
                 <span class="item-name">${item}</span>
+                <input type="number" step="1" placeholder="Qtd" class="quantity-input">
+                <input type="number" step="0.01" placeholder="R$" class="price-input">
             `;
-            listItem.appendChild(quantityInput);
-            listItem.appendChild(priceInput);
-
             itemList.appendChild(listItem);
 
             // Limpar o campo após adicionar o item
             itemInput.value = "";
 
-            // Adicionar um ouvinte de evento para marcar como "Comprado"
-            listItem.addEventListener("click", function () {
-                const isComprado = listItem.classList.contains("comprado");
+            // Adicionar um ouvinte de evento ao nome do item para marcar como "comprado"
+            const itemName = listItem.querySelector(".item-name");
 
-                if (!isComprado) {
-                    listItem.classList.add("comprado");
-                } else {
-                    listItem.classList.remove("comprado");
-                }
-
-                // Recalcular o total após marcar como "Comprado"
+            itemName.addEventListener("click", function () {
+                listItem.classList.toggle("comprado");
                 calcularTotal();
             });
 
