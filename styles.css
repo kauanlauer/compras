@@ -1,33 +1,22 @@
+/* Reset de estilos padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais para o corpo do site */
 body {
     font-family: 'Courier New', monospace;
     background-image: url('papel.jpg'); /* Substitua 'papel.jpg' pelo caminho para a sua imagem de papel de caderno amassado */
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-    background-repeat: repeat; /* Repetir a imagem para preencher a tela */
+    background-repeat: repeat;
+    font-size: 16px;
 }
 
-/* Estilizar o botão de reset */
-#reset-list {
-    background-color: #d9534f;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: auto; /* Tamanho do botão de acordo com o conteúdo de texto */
-    padding: 8px 12px; /* Espaçamento interno para melhor aparência */
-    text-align: center;
-    font-size: 18px; /* Tamanho da fonte */
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#reset-list:hover {
-    background-color: #c9302c;
-}
-
+/* Estilizar o cabeçalho */
 h1 {
     font-size: 24px;
     text-align: center;
@@ -37,19 +26,37 @@ h1 {
     color: #333;
 }
 
+/* Estilizar os botões Limpar e Salvar */
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+#reset-list {
+    background-color: #d9534f;
+}
+
+/* Estilizar o formulário de compras */
 #shopping-form {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Sombra mais estilizada */
-    position: relative; /* Necessário para o efeito de borda neon */
-    overflow: hidden; /* Esconde as luzes fora do container */
-    border: 2px solid #007bff; /* Adiciona uma borda */
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5); /* Efeito de borda neon */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
 }
 
+/* Estilizar os campos de entrada de itens */
 .item-input {
     display: flex;
     align-items: center;
@@ -57,12 +64,12 @@ h1 {
 }
 
 .item-input input[type="text"] {
-    flex: 1; /* Preencher o espaço disponível */
+    flex: 1;
     padding: 10px;
     border: none;
     border-bottom: 1px solid #ddd;
     font-family: 'Courier New', monospace;
-    font-size: 20px; /* Aumentar o tamanho da letra */
+    font-size: 20px;
     background-color: transparent;
 }
 
@@ -76,6 +83,7 @@ h1 {
     font-size: 16px;
 }
 
+/* Estilizar a lista de itens */
 #item-list {
     list-style-type: none;
     padding: 0;
@@ -86,9 +94,9 @@ li {
     align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid #ccc;
-    font-size: 20px; /* Aumentar o tamanho da letra */
+    font-size: 20px;
     font-family: 'Courier New', monospace;
-    font-style: italic; /* Estilo de escrita à mão */
+    font-style: italic;
 }
 
 span {
@@ -101,7 +109,7 @@ span {
 
 .quantity-input,
 .price-input {
-    width: 60px; /* Tamanho menor para quantidade e preço */
+    width: 60px;
 }
 
 /* Estilizar o total */
@@ -113,8 +121,9 @@ span {
     color: #333;
 }
 
+/* Estilizar itens marcados como comprados */
 li.comprado .item-name {
-    text-decoration: line-through; /* Adicionar linha no meio do texto */
+    text-decoration: line-through;
 }
 
 /* Estilizar o rodapé */
@@ -124,12 +133,12 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: #fff; /* Cor de fundo */
-    opacity: 0.7; /* Opacidade para torná-lo discreto */
+    background-color: #fff;
+    opacity: 0.7;
 }
 
 footer p {
     margin: 0;
-    font-size: 14px; /* Tamanho da fonte menor para torná-lo discreto */
-    color: #333; /* Cor do texto discreta */
+    font-size: 14px;
+    color: #333;
 }
