@@ -3,18 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const addItemButton = document.getElementById("add-item");
     const itemInput = document.getElementById("item");
     const totalSpan = document.getElementById("total");
+    const resetButton = document.getElementById("reset-list"); // Botão de reset
+
+    // Carregar a lista salva no localStorage, se existir
+    const savedList = JSON.parse(localStorage.getItem("shoppingList")) || [];
+    savedList.forEach(function (savedItem) {
+        addItemToList(savedItem);
+    });
 
     addItemButton.addEventListener("click", function () {
         const item = itemInput.value.trim().toUpperCase();
 
         if (item !== "") {
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `
-                <span class="item-name">${item}</span>
-                <input type="number" step="1" placeholder="Qtd" class="quantity-input">
-                <input type="number" step="0.01" placeholder="R$" class="price-input">
-            `;
-            itemList.appendChild(listItem);
+            const listItem = addItemToList(item);
 
             // Limpar o campo após adicionar o item
             itemInput.value = "";
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             itemName.addEventListener("click", function (event) {
                 event.stopPropagation(); // Impedir que o clique no nome afete a marcação como "comprado"
                 listItem.classList.toggle("comprado");
+                salvarLista();
             });
 
             // Recalcular o total após adicionar um item
@@ -32,9 +34,35 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    itemList.addEventListener("input", function () {
+    resetButton.addEventListener("click", function () {
+        // Remover todos os itens da lista
+        itemList.innerHTML = "";
+
+        // Limpar o campo após adicionar o item
+        itemInput.value = "";
+
+        // Limpar o localStorage
+        localStorage.removeItem("shoppingList");
+
+        // Recalcular o total após limpar a lista
         calcularTotal();
     });
+
+    itemList.addEventListener("input", function () {
+        calcularTotal();
+        salvarLista();
+    });
+
+    function addItemToList(itemName) {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+            <span class="item-name">${itemName}</span>
+            <input type="number" step="1" placeholder="Qtd" class="quantity-input">
+            <input type="number" step="0.01" placeholder="R$" class="price-input">
+        `;
+        itemList.appendChild(listItem);
+        return listItem;
+    }
 
     function calcularTotal() {
         let total = 0;
@@ -52,5 +80,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         totalSpan.textContent = total.toFixed(2);
+    }
+
+    function salvarLista() {
+        const items = [];
+        const itemsList = itemList.querySelectorAll("li");
+
+        itemsList.forEach(function (item) {
+            const itemName = item.querySelector(".item-name").textContent;
+            items.push(itemName);
+        });
+
+        localStorage.setItem("shoppingList", JSON.stringify(items));
     }
 });

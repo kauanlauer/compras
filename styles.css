@@ -7,6 +7,27 @@ body {
     background-repeat: repeat; /* Repetir a imagem para preencher a tela */
 }
 
+/* Estilizar o botão de reset */
+#reset-list {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: auto; /* Tamanho do botão de acordo com o conteúdo de texto */
+    padding: 8px 12px; /* Espaçamento interno para melhor aparência */
+    text-align: center;
+    font-size: 18px; /* Tamanho da fonte */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reset-list:hover {
+    background-color: #c9302c;
+}
+
 h1 {
     font-size: 24px;
     text-align: center;
@@ -22,7 +43,11 @@ h1 {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Sombra mais estilizada */
+    position: relative; /* Necessário para o efeito de borda neon */
+    overflow: hidden; /* Esconde as luzes fora do container */
+    border: 2px solid #007bff; /* Adiciona uma borda */
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5); /* Efeito de borda neon */
 }
 
 .item-input {
@@ -87,6 +112,7 @@ span {
     font-weight: bold;
     color: #333;
 }
+
 li.comprado .item-name {
     text-decoration: line-through; /* Adicionar linha no meio do texto */
 }
