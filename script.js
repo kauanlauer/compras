@@ -12,31 +12,30 @@ document.addEventListener("DOMContentLoaded", function () {
         savedList.forEach(function (savedItem) {
             addItemToList(savedItem);
         });
+        calcularTotal();
     }
 
     // Carregue a lista de compras ao carregar a página
     loadShoppingList();
 
     addItemButton.addEventListener("click", function () {
-        const item = itemInput.value.trim().toUpperCase();
+        const itemInputValue = itemInput.value.trim().toUpperCase();
+        const quantityInput = 1; // Defina a quantidade como desejado.
+        const priceInput = 0; // Defina o preço como desejado.
 
-        if (item !== "") {
+        if (itemInputValue !== "") {
+            const item = {
+                name: itemInputValue,
+                quantity: quantityInput,
+                price: priceInput,
+                purchased: false
+            };
+
             const listItem = addItemToList(item);
 
             // Limpar o campo após adicionar o item
             itemInput.value = "";
-
-            // Adicionar um ouvinte de evento ao nome do item para marcar como "comprado"
-            const itemName = listItem.querySelector(".item-name");
-
-            itemName.addEventListener("click", function (event) {
-                event.stopPropagation(); // Impedir que o clique no nome afete a marcação como "comprado"
-                listItem.classList.toggle("comprado");
-                salvarLista();
-            });
-
-            // Recalcular o total após adicionar um item
-            calcularTotal();
+            salvarLista();
         }
     });
 
@@ -64,15 +63,28 @@ document.addEventListener("DOMContentLoaded", function () {
         salvarLista();
     });
 
-    function addItemToList(itemName) {
+    function addItemToList(item) {
         const listItem = document.createElement("li");
         listItem.innerHTML = `
-            <span class="item-name">${itemName}</span>
-            <input type="number" step="1" placeholder="Qtd" class="quantity-input">
-            <input type="number" step="0.01" placeholder="R$" class="price-input">
+            <span class="item-name">${item.name}</span>
+            <input type="number" step="1" placeholder="Qtd" class="quantity-input" value="${item.quantity}">
+            <input type="number" step="0.01" placeholder="R$" class="price-input" value="${item.price}">
+            <button class="mark-as-purchased">${item.purchased ? "Comprado" : "Comprar"}</button>
         `;
-        
+
         itemList.appendChild(listItem);
+
+        // Adicionar um ouvinte de evento ao botão "Comprar/Comprado"
+        const markAsPurchasedButton = listItem.querySelector(".mark-as-purchased");
+        markAsPurchasedButton.addEventListener("click", function () {
+            item.purchased = !item.purchased;
+            updatePurchasedStyle(markAsPurchasedButton, item.purchased);
+            markAsPurchasedButton.textContent = item.purchased ? "Comprado" : "Comprar";
+            salvarLista();
+        });
+
+        updatePurchasedStyle(markAsPurchasedButton, item.purchased);
+
         return listItem;
     }
 
@@ -86,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const quantity = parseFloat(quantityInput.value) || 1;
             const price = parseFloat(priceInput.value) || 0;
 
-            if (!item.classList.contains("comprado")) {
+            if (!item.purchased) {
                 total += quantity * price;
             }
         });
@@ -100,10 +112,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
         itemsList.forEach(function (item) {
             const itemName = item.querySelector(".item-name").textContent;
-            items.push(itemName);
+            const itemQuantity = item.querySelector(".quantity-input").value || 1;
+            const itemPrice = item.querySelector(".price-input").value || 0;
+            const isPurchased = item.querySelector(".mark-as-purchased").textContent === "Comprado";
+
+            items.push({ name: itemName, quantity: itemQuantity, price: itemPrice, purchased: isPurchased });
         });
 
         localStorage.setItem("shoppingList", JSON.stringify(items));
     }
-    
+
+    function updatePurchasedStyle(button, isPurchased) {
+        if (isPurchased) {
+            button.style.backgroundColor = "red";
+        } else {
+            button.style.backgroundColor = "blue";
+        }
+    }
 });

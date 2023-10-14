@@ -121,24 +121,17 @@ span {
     color: #333;
 }
 
-/* Estilizar itens marcados como comprados */
-li.comprado .item-name {
-    text-decoration: line-through;
-}
-
-/* Estilizar o rodapé */
-footer {
-    text-align: center;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: #fff;
-    opacity: 0.7;
-}
-
-footer p {
-    margin: 0;
+/* Estilizar o botão "Comprar/Comprado" */
+.mark-as-purchased {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
     font-size: 14px;
-    color: #333;
+}
+
+.mark-as-purchased.purchased {
+    background-color: red;
 }
