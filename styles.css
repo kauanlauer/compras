@@ -46,7 +46,7 @@ button:hover {
 
 /* Estilizar o formulário de compras */
 #shopping-form {
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -91,6 +91,7 @@ button:hover {
 #item-list {
     list-style-type: none;
     padding: 0;
+    width: 100%;
 }
 
 li {
@@ -125,8 +126,8 @@ span {
 /* Estilizar o total */
 #total-container {
     text-align: right;
-    margin-top: 10px;
-    font-size: 20px;
+    margin-top: 20px; /* Aumente a margem superior para criar mais espaço para os itens */
+    font-size: 30px;
     font-weight: bold;
     color: #007bff;
 }
@@ -144,52 +145,6 @@ span {
 
 .mark-as-purchased.purchased {
     background-color: #d9534f;
-}
-
-/* Estilos do menu lateral */
-.menu-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #333;
-    color: #fff;
-    width: 50px;
-    text-align: center;
-}
-
-.menu-container button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.menu {
-    position: fixed;
-    top: 0;
-    left: -150px;
-    width: 150px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    transition: 0.5s;
-}
-
-.menu button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px;
-    cursor: pointer;
-    text-align: left;
-    font-size: 16px;
-}
-
-.menu button:hover {
-    background-color: #444;
 }
 /* Estilos do menu lateral */
 .menu-container {
@@ -240,4 +195,40 @@ span {
 
 .menu button:hover {
     background-color: #0056b3;
+}
+/* Estilizar a lista de itens */
+#item-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+
+/* Ajuste a largura do nome do item e adicione quebra de palavras para que o nome seja exibido completo */
+span.item-name {
+    flex: 2; /* Aumente o tamanho para acomodar nomes mais longos */
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word; /* Isso permite a quebra de palavras */
+}
+
+.quantity-input,
+.price-input {
+    width: 60px;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #007bff;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    background-color: transparent;
+    outline: none;
 }
