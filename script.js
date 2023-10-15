@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalSpan = document.getElementById("total");
     const resetButton = document.getElementById("reset-list");
     const saveListButton = document.getElementById("save-list");
+    const deleteSelectedButton = document.getElementById("delete-selected");
 
-    // Função para carregar a lista de compras salva no localStorage
     function loadShoppingList() {
         const savedList = JSON.parse(localStorage.getItem("shoppingList")) || [];
         savedList.forEach(function (savedItem) {
@@ -15,13 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
         calcularTotal();
     }
 
-    // Carregue a lista de compras ao carregar a página
     loadShoppingList();
 
     addItemButton.addEventListener("click", function () {
         const itemInputValue = itemInput.value.trim().toUpperCase();
-        const quantityInput = 1; // Defina a quantidade como desejado.
-        const priceInput = 0; // Defina o preço como desejado.
+        const quantityInput = 1;
+        const priceInput = 0;
 
         if (itemInputValue !== "") {
             const item = {
@@ -33,23 +32,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const listItem = addItemToList(item);
 
-            // Limpar o campo após adicionar o item
             itemInput.value = "";
             salvarLista();
         }
     });
 
     resetButton.addEventListener("click", function () {
-        // Remover todos os itens da lista
         itemList.innerHTML = "";
-
-        // Limpar o campo após adicionar o item
         itemInput.value = "";
-
-        // Limpar o localStorage
         localStorage.removeItem("shoppingList");
-
-        // Recalcular o total após limpar a lista
         calcularTotal();
     });
 
@@ -59,13 +50,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     saveListButton.addEventListener("click", function () {
-        // Função para salvar a lista no cache do navegador
         salvarLista();
+    });
+
+    deleteSelectedButton.addEventListener("click", function () {
+        const selectedItems = itemList.querySelectorAll(".select-item:checked");
+
+        selectedItems.forEach(function (selectedItem) {
+            const itemIdToDelete = selectedItem.getAttribute("data-item-id");
+            deleteItemFromList(itemIdToDelete);
+        });
     });
 
     function addItemToList(item) {
         const listItem = document.createElement("li");
+        const itemId = generateItemId();
+
         listItem.innerHTML = `
+            <input type="checkbox" class="select-item" data-item-id="${itemId}">
             <span class="item-name">${item.name}</span>
             <input type="number" step="1" placeholder="Qtd" class="quantity-input" value="${item.quantity}">
             <input type="number" step="0.01" placeholder="R$" class="price-input" value="${item.price}">
@@ -74,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         itemList.appendChild(listItem);
 
-        // Adicionar um ouvinte de evento ao botão "Comprar/Comprado"
         const markAsPurchasedButton = listItem.querySelector(".mark-as-purchased");
         markAsPurchasedButton.addEventListener("click", function () {
             item.purchased = !item.purchased;
@@ -86,6 +87,13 @@ document.addEventListener("DOMContentLoaded", function () {
         updatePurchasedStyle(markAsPurchasedButton, item.purchased);
 
         return listItem;
+    }
+
+    function deleteItemFromList(itemId) {
+        const itemToDelete = document.querySelector(`[data-item-id="${itemId}"]`).parentElement;
+        itemList.removeChild(itemToDelete);
+        calcularTotal();
+        salvarLista();
     }
 
     function calcularTotal() {
@@ -129,4 +137,23 @@ document.addEventListener("DOMContentLoaded", function () {
             button.style.backgroundColor = "blue";
         }
     }
+
+    function generateItemId() {
+        return "item-" + new Date().getTime();
+    }
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const openMenuButton = document.getElementById("open-menu");
+    const menu = document.querySelector(".menu");
+
+    openMenuButton.addEventListener("click", function () {
+        menu.style.left = "0";
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!menu.contains(event.target) && event.target !== openMenuButton) {
+            menu.style.left = "-150px";
+        }
+    });
+});
+

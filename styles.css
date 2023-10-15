@@ -1,14 +1,7 @@
-/* Reset de estilos padrão do navegador */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Estilos gerais para o corpo do site */
+/* Estilos gerais */
 body {
-    font-family: 'Courier New', monospace;
-    background-image: url('papel.jpg'); /* Substitua 'papel.jpg' pelo caminho para a sua imagem de papel de caderno amassado */
+    font-family: Arial, sans-serif;
+    background-image: url('papel.jpg');
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
@@ -18,27 +11,36 @@ body {
 
 /* Estilizar o cabeçalho */
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     text-align: center;
     padding: 20px 0;
     text-transform: uppercase;
     letter-spacing: 4px;
-    color: #333;
+    color: #007bff;
 }
 
-/* Estilizar os botões Limpar e Salvar */
+/* Estilizar botões */
 button {
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 #reset-list {
+    background-color: #d9534f;
+}
+
+#delete-selected {
     background-color: #d9534f;
 }
 
@@ -67,10 +69,12 @@ button {
     flex: 1;
     padding: 10px;
     border: none;
-    border-bottom: 1px solid #ddd;
-    font-family: 'Courier New', monospace;
+    border-bottom: 2px solid #007bff;
+    font-family: Arial, sans-serif;
     font-size: 20px;
     background-color: transparent;
+    color: #007bff;
+    outline: none;
 }
 
 #add-item {
@@ -80,7 +84,7 @@ button {
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 /* Estilizar a lista de itens */
@@ -92,16 +96,15 @@ button {
 li {
     display: flex;
     align-items: center;
-    padding: 5px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #ccc;
-    font-size: 20px;
-    font-family: 'Courier New', monospace;
-    font-style: italic;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
 }
 
 span {
     flex: 1;
-    padding: 5px;
+    padding: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -110,28 +113,131 @@ span {
 .quantity-input,
 .price-input {
     width: 60px;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #007bff;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    background-color: transparent;
+    outline: none;
 }
 
 /* Estilizar o total */
 #total-container {
     text-align: right;
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
-    color: #333;
+    color: #007bff;
 }
 
 /* Estilizar o botão "Comprar/Comprado" */
 .mark-as-purchased {
-    background-color: blue;
+    background-color: #5cb85c;
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 5px 10px;
+    padding: 8px 16px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .mark-as-purchased.purchased {
-    background-color: red;
+    background-color: #d9534f;
+}
+
+/* Estilos do menu lateral */
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    width: 50px;
+    text-align: center;
+}
+
+.menu-container button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -150px;
+    width: 150px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.menu button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+}
+
+.menu button:hover {
+    background-color: #444;
+}
+/* Estilos do menu lateral */
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #007bff;
+    width: 50px;
+    text-align: center;
+    transition: background-color 0.3s;
+    z-index: 1;
+}
+
+.menu-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -150px;
+    width: 150px;
+    height: 100%;
+    background-color: #007bff;
+    color: #fff;
+    transition: 0.3s;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    padding: 15px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    width: 100%;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.menu button:hover {
+    background-color: #0056b3;
 }
