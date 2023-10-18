@@ -37,12 +37,13 @@ button:hover {
 }
 
 #reset-list {
-    background-color: #d9534f;
+    background-color: #0056b3;
 }
 
 #delete-selected {
-    background-color: #d9534f;
+    background-color: #0056b3;
 }
+
 
 /* Estilizar o formulário de compras */
 #shopping-form {
@@ -54,15 +55,15 @@ button:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
-    border: 2px solid #007bff;
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 /* Estilizar os campos de entrada de itens */
 .item-input {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 }
 
 .item-input input[type="text"] {
@@ -214,7 +215,7 @@ li {
 /* Ajuste a largura do nome do item e adicione quebra de palavras para que o nome seja exibido completo */
 span.item-name {
     flex: 2; /* Aumente o tamanho para acomodar nomes mais longos */
-    padding: 10px;
+    padding: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

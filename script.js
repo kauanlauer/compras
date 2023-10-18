@@ -19,14 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addItemButton.addEventListener("click", function () {
         const itemInputValue = itemInput.value.trim().toUpperCase();
-        const quantityInput = 1;
-        const priceInput = 0;
 
         if (itemInputValue !== "") {
             const item = {
                 name: itemInputValue,
-                quantity: quantityInput,
-                price: priceInput,
+                quantity: "", // Deixar em branco
+                price: "",    // Deixar em branco
                 purchased: false
             };
 
@@ -141,8 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function generateItemId() {
         return "item-" + new Date().getTime();
     }
-});
-document.addEventListener("DOMContentLoaded", function () {
+
     const openMenuButton = document.getElementById("open-menu");
     const menu = document.querySelector(".menu");
 
@@ -156,4 +153,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-
