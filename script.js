@@ -115,3 +115,20 @@ function backToLoginForm() {
     document.getElementById('resetPasswordForm').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
 }
+function loginWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    
+    firebase.auth().signInWithPopup(provider)
+        .then((userCredential) => {
+            // Login bem-sucedido com o Google
+            const user = userCredential.user;
+            showMessage('Login com o Google bem-sucedido. Bem-vindo, ' + user.displayName + '!', true);
+            // Redirecione o usuário ou execute outras ações necessárias.
+        })
+        .catch((error) => {
+            // Lidar com erros de login com o Google
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            showMessage('Erro ao fazer login com o Google: ' + errorCode + ' - ' + errorMessage, false);
+        });
+}

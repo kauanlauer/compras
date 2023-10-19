@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adicione esta linha -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,7 +11,7 @@
         <header>
             <h1 class="logo">Lista de compras KL</h1>
         </header>
-    
+
         <div id="loginForm" class="form-container">
             <h2 class="form-title">Faça Login</h2>
             <form class="form">
@@ -23,8 +23,9 @@
             </form>
             <p class="form-link">Não tem uma conta? <a href="#" class="btn-link" onclick="showRegistrationForm()">Registrar</a></p>
             <p class="form-link"><a href="#" class="btn-link" onclick="showResetPasswordForm()">Esqueceu a senha?</a></p>
+            <button type="button" class="btn-google" onclick="loginWithGoogle()">Login com Google</button>
         </div>
-    
+
         <div id="registrationForm" class="form-container" style="display: none;">
             <h2 class="form-title">Registrar</h2>
             <form class="form">
@@ -33,17 +34,18 @@
                 <button type="button" class="btn-primary" onclick="register()">Registrar</button>
             </form>
             <p class="form-link">Já tem uma conta? <a href="#" class="btn-link" onclick="showLoginForm()">Login</a></p>
+            <button type="button" class="btn-google" onclick="loginWithGoogle()">Login com Google</button>
         </div>
-    
+
         <div id="resetPasswordForm" class="reset-password-form" style="display: none;">
-            <h2 class="form-title">Esqueceu a Senha</h2>
+            <h2 class "form-title">Esqueceu a Senha</h2>
             <form class="form">
                 <input type="email" id="resetPasswordEmail" class="input-field" placeholder="E-mail" required><br>
                 <button type="button" class="btn-primary" onclick="resetPassword()">Enviar e-mail de redefinição de senha</button>
             </form>
             <p class="form-link">Lembrou a senha? <a href="#" class="btn-link" onclick="backToLoginForm()">Login</a></p>
         </div>
-    
+
         <div id="feedback" class="feedback-container" style="display: none;">
             <p id="message" class="feedback-message"></p>
         </div>
