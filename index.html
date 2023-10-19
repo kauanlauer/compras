@@ -29,6 +29,8 @@
         <div id="registrationForm" class="form-container" style="display: none;">
             <h2 class="form-title">Registrar</h2>
             <form class="form">
+                <input type="text" id="firstName" class="input-field" placeholder="Primeiro Nome" required><br>
+                <input type="text" id="lastName" class="input-field" placeholder="Último Nome" required><br>
                 <input type="email" id="registrationEmail" class="input-field" placeholder="E-mail" required><br>
                 <input type="password" id="registrationPassword" class="input-field" placeholder="Senha" required><br>
                 <button type="button" class="btn-primary" onclick="register()">Registrar</button>
@@ -36,6 +38,7 @@
             <p class="form-link">Já tem uma conta? <a href="#" class="btn-link" onclick="showLoginForm()">Login</a></p>
             <button type="button" class="btn-google" onclick="loginWithGoogle()">Login com Google</button>
         </div>
+        
 
         <div id="resetPasswordForm" class="reset-password-form" style="display: none;">
             <h2 class "form-title">Esqueceu a Senha</h2>
