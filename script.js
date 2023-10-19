@@ -1,155 +1,117 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const itemList = document.getElementById("item-list");
-    const addItemButton = document.getElementById("add-item");
-    const itemInput = document.getElementById("item");
-    const totalSpan = document.getElementById("total");
-    const resetButton = document.getElementById("reset-list");
-    const saveListButton = document.getElementById("save-list");
-    const deleteSelectedButton = document.getElementById("delete-selected");
+// Inicialize o Firebase com as configurações do seu projeto
+const firebaseConfig = {
+    apiKey: "AIzaSyCmPWE7wjKuL-iH_Plq4Dn5Va5z-xjGSxU",
+    authDomain: "compras-db75b.firebaseapp.com",
+    databaseURL: "https://compras-db75b-default-rtdb.firebaseio.com",
+    projectId: "compras-db75b",
+    storageBucket: "compras-db75b.appspot.com",
+    messagingSenderId: "349408434820",
+    appId: "1:349408434820:web:c105e1d21dc053f5bec0d1"
+  };
 
-    function loadShoppingList() {
-        const savedList = JSON.parse(localStorage.getItem("shoppingList")) || [];
-        savedList.forEach(function (savedItem) {
-            addItemToList(savedItem);
+firebase.initializeApp(firebaseConfig);
+
+// Função para mostrar o formulário de registro
+function showRegistrationForm() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registrationForm').style.display = 'block';
+}
+
+// Função para mostrar o formulário de login
+function showLoginForm() {
+    document.getElementById('registrationForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+}
+
+// Função para exibir mensagens de feedback
+function showMessage(message, success) {
+    const feedbackDiv = document.getElementById('feedback');
+    const messageDiv = document.getElementById('message');
+
+    messageDiv.textContent = message;
+    feedbackDiv.style.display = 'block';
+    
+    if (success) {
+        feedbackDiv.style.backgroundColor = '#ffffff'; // Fundo branco para mensagens de sucesso
+        messageDiv.style.color = '#000000'; // Texto preto para mensagens de sucesso
+    } else {
+        feedbackDiv.style.backgroundColor = '#f44336'; // Cor de fundo vermelho para mensagens de erro
+        messageDiv.style.color = '#000000'; // Texto preto para mensagens de erro
+    }
+}
+
+
+function register() {
+    const email = document.getElementById('registrationEmail').value;
+    const password = document.getElementById('registrationPassword').value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Registro bem-sucedido
+            const user = userCredential.user;
+            showMessage('Registro bem-sucedido. Você pode fazer login agora.', true);
+            showLoginForm();
+        })
+        .catch((error) => {
+            // Lidar com erros de registro
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            showMessage('Erro de registro: ' + errorCode + ' - ' + errorMessage, false);
         });
-        calcularTotal();
-    }
+}
 
-    loadShoppingList();
+function login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const rememberLogin = document.getElementById('rememberLogin').checked;
 
-    addItemButton.addEventListener("click", function () {
-        const itemInputValue = itemInput.value.trim().toUpperCase();
+    firebase.auth().setPersistence(rememberLogin ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+            return firebase.auth().signInWithEmailAndPassword(email, password);
+        })
+        .then((userCredential) => {
+            // Login bem-sucedido
+            const user = userCredential.user;
+            showMessage('Login bem-sucedido. Bem-vindo, ' + user.email + '!', true);
 
-        if (itemInputValue !== "") {
-            const item = {
-                name: itemInputValue,
-                quantity: "", // Deixar em branco
-                price: "",    // Deixar em branco
-                purchased: false
-            };
-
-            const listItem = addItemToList(item);
-
-            itemInput.value = "";
-            salvarLista();
-        }
-    });
-
-    resetButton.addEventListener("click", function () {
-        itemList.innerHTML = "";
-        itemInput.value = "";
-        localStorage.removeItem("shoppingList");
-        calcularTotal();
-    });
-
-    itemList.addEventListener("input", function () {
-        calcularTotal();
-        salvarLista();
-    });
-
-    saveListButton.addEventListener("click", function () {
-        salvarLista();
-    });
-
-    deleteSelectedButton.addEventListener("click", function () {
-        const selectedItems = itemList.querySelectorAll(".select-item:checked");
-
-        selectedItems.forEach(function (selectedItem) {
-            const itemIdToDelete = selectedItem.getAttribute("data-item-id");
-            deleteItemFromList(itemIdToDelete);
+            // Redirecionar o usuário para a página principal (substitua 'pagina-principal.html' pelo URL desejado)
+            window.location.href = 'lista.html';
+        })
+        .catch((error) => {
+            // Lidar com erros de login
+            const errorCode = error.code;
+            const errorMessage = errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found' ? 'Usuário ou senha errados' : error.message;
+            showMessage('Erro de login: ' + errorMessage, false);
         });
-    });
+}
 
-    function addItemToList(item) {
-        const listItem = document.createElement("li");
-        const itemId = generateItemId();
+// Função para redefinir a senha
+function resetPassword() {
+    const email = document.getElementById('resetPasswordEmail').value;
 
-        listItem.innerHTML = `
-            <input type="checkbox" class="select-item" data-item-id="${itemId}">
-            <span class="item-name">${item.name}</span>
-            <input type="number" step="1" placeholder="Qtd" class="quantity-input" value="${item.quantity}">
-            <input type="number" step="0.01" placeholder="R$" class="price-input" value="${item.price}">
-            <button class="mark-as-purchased">${item.purchased ? "Comprado" : "Comprar"}</button>
-        `;
-
-        itemList.appendChild(listItem);
-
-        const markAsPurchasedButton = listItem.querySelector(".mark-as-purchased");
-        markAsPurchasedButton.addEventListener("click", function () {
-            item.purchased = !item.purchased;
-            updatePurchasedStyle(markAsPurchasedButton, item.purchased);
-            markAsPurchasedButton.textContent = item.purchased ? "Comprado" : "Comprar";
-            salvarLista();
+    firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+            // E-mail de redefinição de senha enviado com sucesso
+            showMessage('E-mail de redefinição de senha enviado. Verifique sua caixa de entrada.', true);
+            // Você pode redirecionar o usuário para uma página de confirmação aqui
+        })
+        .catch((error) => {
+            // Lidar com erros de redefinição de senha
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            showMessage('Erro ao enviar o e-mail de redefinição de senha: ' + errorCode + ' - ' + errorMessage, false);
         });
+}
 
-        updatePurchasedStyle(markAsPurchasedButton, item.purchased);
+// Função para mostrar o formulário de redefinição de senha
+function showResetPasswordForm() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registrationForm').style.display = 'none';
+    document.getElementById('resetPasswordForm').style.display = 'block';
+}
 
-        return listItem;
-    }
-
-    function deleteItemFromList(itemId) {
-        const itemToDelete = document.querySelector(`[data-item-id="${itemId}"]`).parentElement;
-        itemList.removeChild(itemToDelete);
-        calcularTotal();
-        salvarLista();
-    }
-
-    function calcularTotal() {
-        let total = 0;
-        const items = itemList.querySelectorAll("li");
-
-        items.forEach(function (item) {
-            const quantityInput = item.querySelector(".quantity-input");
-            const priceInput = item.querySelector(".price-input");
-            const quantity = parseFloat(quantityInput.value) || 1;
-            const price = parseFloat(priceInput.value) || 0;
-
-            if (!item.purchased) {
-                total += quantity * price;
-            }
-        });
-
-        totalSpan.textContent = total.toFixed(2);
-    }
-
-    function salvarLista() {
-        const items = [];
-        const itemsList = itemList.querySelectorAll("li");
-
-        itemsList.forEach(function (item) {
-            const itemName = item.querySelector(".item-name").textContent;
-            const itemQuantity = item.querySelector(".quantity-input").value || 1;
-            const itemPrice = item.querySelector(".price-input").value || 0;
-            const isPurchased = item.querySelector(".mark-as-purchased").textContent === "Comprado";
-
-            items.push({ name: itemName, quantity: itemQuantity, price: itemPrice, purchased: isPurchased });
-        });
-
-        localStorage.setItem("shoppingList", JSON.stringify(items));
-    }
-
-    function updatePurchasedStyle(button, isPurchased) {
-        if (isPurchased) {
-            button.style.backgroundColor = "red";
-        } else {
-            button.style.backgroundColor = "blue";
-        }
-    }
-
-    function generateItemId() {
-        return "item-" + new Date().getTime();
-    }
-
-    const openMenuButton = document.getElementById("open-menu");
-    const menu = document.querySelector(".menu");
-
-    openMenuButton.addEventListener("click", function () {
-        menu.style.left = "0";
-    });
-
-    document.addEventListener("click", function (event) {
-        if (!menu.contains(event.target) && event.target !== openMenuButton) {
-            menu.style.left = "-150px";
-        }
-    });
-});
+// Função para voltar ao formulário de login
+function backToLoginForm() {
+    document.getElementById('resetPasswordForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+}

@@ -1,235 +1,144 @@
-/* Estilos gerais */
+/* Adaptações para telas menores (smartphones) */
+@media screen and (max-width: 768px) {
+    body {
+        justify-content: flex-start; /* Alinhe o conteúdo no início da página */
+    }
+    .container {
+        width: 90%; /* Reduza a largura do contêiner */
+    }
+    .form-container {
+        width: 100%; /* Expanda o formulário para preencher a largura da tela */
+    }
+    .form-title {
+        font-size: 20px; /* Reduza o tamanho do título do formulário */
+    }
+    .input-field {
+        font-size: 14px; /* Reduza o tamanho da fonte dos campos de entrada */
+    }
+    .btn-primary {
+        padding: 10px 20px; /* Reduza o preenchimento do botão */
+        font-size: 14px; /* Reduza o tamanho da fonte do botão */
+    }
+    .form-link {
+        font-size: 12px; /* Reduza o tamanho da fonte dos links */
+    }
+    .feedback-message {
+        font-size: 14px; /* Reduza o tamanho da fonte das mensagens de feedback */
+    }
+}
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('papel.jpg');
-    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-repeat: repeat;
-    font-size: 16px;
-}
-
-/* Estilizar o cabeçalho */
-h1 {
-    font-size: 28px;
-    text-align: center;
-    padding: 20px 0;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #007bff;
-}
-
-/* Estilizar botões */
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 24px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-right: 10px;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-#reset-list {
-    background-color: #0056b3;
-}
-
-#delete-selected {
-    background-color: #0056b3;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Use 'min-height' para manter a página centralizada mesmo quando o conteúdo é longo. */
 }
 
 
-/* Estilizar o formulário de compras */
-#shopping-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
+
+/* ... Seu CSS existente ... */
+
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
-    border: 2px solid #ffffff;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-}
-
-/* Estilizar os campos de entrada de itens */
-.item-input {
-    display: flex;
-    align-items: center;
-    margin-bottom: 14px;
-}
-
-.item-input input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-bottom: 2px solid #007bff;
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    background-color: transparent;
-    color: #007bff;
-    outline: none;
-}
-
-#add-item {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/* Estilizar a lista de itens */
-#item-list {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
-}
-
-li {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-}
-
-span {
-    flex: 1;
-    padding: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.quantity-input,
-.price-input {
-    width: 60px;
-    padding: 10px;
-    border: none;
-    border-bottom: 2px solid #007bff;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    background-color: transparent;
-    outline: none;
-}
-
-/* Estilizar o total */
-#total-container {
-    text-align: right;
-    margin-top: 20px; /* Aumente a margem superior para criar mais espaço para os itens */
-    font-size: 30px;
-    font-weight: bold;
-    color: #007bff;
-}
-
-/* Estilizar o botão "Comprar/Comprado" */
-.mark-as-purchased {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.mark-as-purchased.purchased {
-    background-color: #d9534f;
-}
-/* Estilos do menu lateral */
-.menu-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #007bff;
-    width: 50px;
     text-align: center;
-    transition: background-color 0.3s;
-    z-index: 1;
-}
-
-.menu-container button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.menu {
-    position: fixed;
-    top: 0;
-    left: -150px;
-    width: 150px;
-    height: 100%;
-    background-color: #007bff;
-    color: #fff;
-    transition: 0.3s;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.menu button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 0;
-    padding: 15px;
-    cursor: pointer;
-    text-align: left;
-    font-size: 16px;
-    width: 100%;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-.menu button:hover {
-    background-color: #0056b3;
-}
-/* Estilizar a lista de itens */
-#item-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-}
-
-/* Ajuste a largura do nome do item e adicione quebra de palavras para que o nome seja exibido completo */
-span.item-name {
-    flex: 2; /* Aumente o tamanho para acomodar nomes mais longos */
+    width: 350px;
     padding: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word; /* Isso permite a quebra de palavras */
+    margin-top: 20px;
 }
 
-.quantity-input,
-.price-input {
-    width: 60px;
+.form-title {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: 100%;
     padding: 10px;
+    margin: 10px 0;
     border: none;
-    border-bottom: 2px solid #007bff;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    background-color: transparent;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
     outline: none;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.form-label {
+    font-size: 14px;
+    color: #4285F4;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.feedback-container {
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    transition: border-bottom 0.3s, transform 0.3s;
+}
+
+.input-field:focus {
+    border-bottom: 2px solid #3498db;
+    transform: scale(1.02); /* Aumenta ligeiramente o tamanho ao focar */
+}
+
+/* Estilize os botões "Esqueceu a senha" e "Registrar" */
+.btn-link {
+    color: #4285F4;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+.btn-link:hover {
+    color: #2972f6;
+}
+.feedback-container {
+    background-color: #ffffff; /* Fundo branco */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+}
+
+.feedback-message {
+    color: #000; /* Texto preto */
+    font-weight: bold; /* Texto em negrito */
 }

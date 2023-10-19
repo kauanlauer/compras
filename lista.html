@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lista.css">
+    <title>Lista de Compras</title>
+</head>
+<body>
+    <div class="menu-container">
+        <button id="open-menu">☰ Menu</button>
+        <div class="menu">
+            <p>Menu COMPRAS</p>
+            <button id="reset-list">Limpar</button>
+            <button id="save-list">Salvar</button>
+            <button id="delete-selected">Excluir</button>
+            <br>
+            <br>
+            <P>--Usuário--</P>
+            <button id="#">Meu Perfil</button>
+            <button id="#">Média</button>
+
+        </div>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Lista de Compras</h1>
+        </header>
+
+        <form id="shopping-form">
+            <div class="item-input">
+                <input type="text" placeholder="Item" id="item">
+                <button type="button" id="add-item">+</button>
+            </div>
+            <ul id="item-list"></ul>
+            <div id="total-container">
+                Total: <span id="total">0.00</span> R$
+            </div>
+        </form>
+    </div>
+    <footer>
+        <span id="version">Versão 1.0</span>
+    </footer>
+    <script>
+        // Atualize a versão com base na variável de versão
+        const versionElement = document.getElementById("version");
+        const novaVersao = "Versão 3.0"; // Atualize para a nova versão após cada implantação
+        versionElement.textContent = novaVersao;
+    </script>
+    <script src="lista.js"></script>
+</body>
+</html>
