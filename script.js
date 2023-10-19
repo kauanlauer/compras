@@ -112,6 +112,8 @@ function backToLoginForm() {
     document.getElementById('loginForm').style.display = 'block';
 }
 
+// ...
+
 // Função para fazer login com o Google
 function loginWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -119,8 +121,13 @@ function loginWithGoogle() {
     firebase.auth().signInWithPopup(provider)
         .then((userCredential) => {
             const user = userCredential.user;
+            
+            // user.uid contém o ID do usuário do Google
+            const googleUserId = user.uid;
+            
             showMessage('Login com o Google bem-sucedido. Bem-vindo, ' + user.displayName + '!', true);
-            window.location.href = 'lista.html'; // Redirecione o usuário ou execute outras ações necessárias.
+            
+            // Redirecione o usuário ou execute outras ações necessárias.
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -128,3 +135,4 @@ function loginWithGoogle() {
             showMessage('Erro ao fazer login com o Google: ' + errorCode + ' - ' + errorMessage, false);
         });
 }
+
