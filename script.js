@@ -7,11 +7,9 @@ const firebaseConfig = {
     storageBucket: "compras-db75b.appspot.com",
     messagingSenderId: "349408434820",
     appId: "1:349408434820:web:c105e1d21dc053f5bec0d1"
-  };
+};
 
 firebase.initializeApp(firebaseConfig);
-
-// Resto do seu código aqui...
 
 // Função para mostrar o formulário de registro
 function showRegistrationForm() {
@@ -38,7 +36,7 @@ function showMessage(message, success) {
         messageDiv.style.color = '#000000';
     } else {
         feedbackDiv.style.backgroundColor = '#f44336';
-        messageDiv.style.color = '#000000';
+        messageDiv.style.color = '#ffffff';
     }
 }
 
@@ -55,9 +53,6 @@ function register() {
             const user = userCredential.user;
             showMessage('Registro bem-sucedido. Você pode fazer login agora.', true);
             showLoginForm();
-
-            // Aqui você pode armazenar o nome do usuário (primeiro e último) no banco de dados, se desejar.
-            // Certifique-se de configurar um banco de dados Firebase para fazer isso.
         })
         .catch((error) => {
             // Lidar com erros de registro
@@ -66,7 +61,6 @@ function register() {
             showMessage('Erro de registro: ' + errorCode + ' - ' + errorMessage, false);
         });
 }
-
 
 // Função para fazer login
 function login() {
