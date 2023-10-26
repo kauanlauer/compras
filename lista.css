@@ -6,16 +6,16 @@ body {
     margin: 0;
     padding: 0;
     background-repeat: repeat;
-    font-size: 10px; /* Reduza ainda mais o tamanho da fonte geral */
+    font-size: 14px; /* Tamanho da fonte para dispositivos móveis */
 }
 
 /* Estilizar o cabeçalho */
 h1 {
-    font-size: 13px;
+    font-size: 18px; /* Tamanho da fonte do cabeçalho para dispositivos móveis */
     text-align: center;
     padding: 10px 0;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px; /* Espaçamento das letras reduzido para dispositivos móveis */
     color: #007bff;
 }
 
@@ -25,55 +25,42 @@ button {
     color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 12px 24px;
+    padding: 10px 20px; /* Tamanho do botão ajustado para dispositivos móveis */
     cursor: pointer;
-    font-size: 18px;
-    margin-right: 10px;
+    font-size: 16px; /* Tamanho da fonte dos botões para dispositivos móveis */
+    margin-right: 8px; /* Espaçamento entre botões reduzido para dispositivos móveis */
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-#reset-list {
-    background-color: #0056b3;
-}
-
-#delete-selected {
-    background-color: #0056b3;
-}
-
-
 /* Estilize o formulário de compras */
 #shopping-form {
-    max-width: 90%; /* Aumente a largura do formulário para ocupar mais espaço na tela */
+    max-width: 90%;
     margin: 0 auto;
-    padding: 10px; /* Reduza o preenchimento */
+    padding: 10px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
-    border: 2px solid #fff; /* Mude a cor da borda para branco */
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Ajuste a sombra */
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
 /* Estilize os campos de entrada de itens */
 .item-input {
     display: flex;
     align-items: center;
-    margin-bottom: 12px; /* Reduza a margem inferior */
+    margin-bottom: 12px;
 }
 
 /* Estilize as entradas de texto para que sejam mais visíveis e suaves */
 .item-input input[type="text"] {
     flex: 1;
-    padding: 4px;
+    padding: 8px;
     border: none;
     border-bottom: 2px solid #007bff;
     font-family: Arial, sans-serif;
-    font-size: 10px; /* Reduza o tamanho da fonte dos campos de entrada de itens */
+    font-size: 14px; /* Tamanho da fonte dos campos de entrada de itens para dispositivos móveis */
     background-color: transparent;
     color: #007bff;
     outline: none;
@@ -86,45 +73,50 @@ button:hover {
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 /* Estilizar a lista de itens */
 #item-list {
     list-style-type: none;
     padding: 0;
-    width: 100%;
 }
 
 li {
     display: flex;
     align-items: center;
-    padding: 5px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #ccc;
-    font-size: 10px; /* Reduza o tamanho da fonte das listas de itens */
+    font-size: 14px; /* Tamanho da fonte dos itens da lista para dispositivos móveis */
     font-family: Arial, sans-serif;
 }
 
-span {
-    flex: 1;
+span.item-name {
+    flex: 2;
     padding: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 .quantity-input,
 .price-input {
-    width: 40px; /* Reduza a largura */
-    padding: 6px; /* Reduza o preenchimento */
-    font-size: 12px; /* Reduza o tamanho da fonte das quantidades e preços */
+    width: 60px;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #007bff;
+    font-family: Arial, sans-serif;
+    font-size: 14px; /* Tamanho da fonte das quantidades e preços para dispositivos móveis */
+    background-color: transparent;
+    outline: none;
 }
 
 /* Estilizar o total */
 #total-container {
     text-align: right;
-    margin-top: 10px; /* Aumente a margem superior para criar mais espaço para os itens */
-    font-size: 15px;
+    margin-top: 10px;
+    font-size: 18px; /* Tamanho da fonte do total para dispositivos móveis */
     font-weight: bold;
     color: #007bff;
 }
@@ -143,6 +135,7 @@ span {
 .mark-as-purchased.purchased {
     background-color: #d9534f;
 }
+
 /* Estilos do menu lateral */
 .menu-container {
     position: fixed;
@@ -193,42 +186,7 @@ span {
 .menu button:hover {
     background-color: #0056b3;
 }
-/* Estilizar a lista de itens */
-#item-list {
-    list-style-type: none;
-    padding: 0;
-}
 
-li {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-}
-
-/* Ajuste a largura do nome do item e adicione quebra de palavras para que o nome seja exibido completo */
-span.item-name {
-    flex: 10; /* Aumente o tamanho para acomodar nomes mais longos */
-    padding: 15px; /* Reduza o preenchimento */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word; /* Isso permite a quebra de palavras */
-}
-
-.quantity-input,
-.price-input {
-    width: 60px;
-    padding: 10px;
-    border: none;
-    border-bottom: 2px solid #007bff;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-    background-color: transparent;
-    outline: none;
-}
 body {
     position: relative;
     min-height: 100vh;
