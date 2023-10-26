@@ -10,11 +10,13 @@
     <div class="menu-container">
         <button id="open-menu">☰ Menu</button>
         <div class="menu">
-            <p>Menu COMPRAS</p>
-            <button id="reset-list">Limpar</button>
-            <button id="save-list">Salvar</button>
-            <button id="delete-selected">Excluir</button>
-        </div>
+    <p>Menu COMPRAS</p>
+    <button id="reset-list">Limpar</button>
+    <button id="save-list">Salvar</button>
+    <button id="delete-selected">Excluir</button>
+    <button id="return-to-login" onclick="returnToLogin()">Login</button>
+</div>
+
     </div>
     <div class="content">
         <header>
@@ -40,6 +42,11 @@
         const versionElement = document.getElementById("version");
         const novaVersao = "Versão 3.0"; // Atualize para a nova versão após cada implantação
         versionElement.textContent = novaVersao;
+        // Função para redirecionar o usuário para a página de login
+function returnToLogin() {
+    // Redirecionar o usuário para a página de login (index.html)
+    window.location.href = 'index.html';
+}
     </script>
     <script src="lista.js"></script>
 </body>

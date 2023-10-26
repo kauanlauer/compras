@@ -68,22 +68,41 @@ function login() {
     const password = document.getElementById('loginPassword').value;
     const rememberLogin = document.getElementById('rememberLogin').checked;
 
-    firebase.auth().setPersistence(rememberLogin ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION)
-        .then(() => {
-            return firebase.auth().signInWithEmailAndPassword(email, password);
-        })
-        .then((userCredential) => {
-            const user = userCredential.user;
-            showMessage('Login bem-sucedido. Bem-vindo, ' + user.email + '!', true);
-            window.location.href = 'lista.html';
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found' ? 'Usuário ou senha errados' : error.message;
-            showMessage('Erro de login: ' + errorMessage, false);
-        });
+    // Solicitar permissão para usar o recurso de persistência local
+    if (rememberLogin) {
+        if (confirm("Permitir que o navegador lembre seu login?")) {
+            firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .then(() => {
+                    return firebase.auth().signInWithEmailAndPassword(email, password);
+                })
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    showMessage('Login bem-sucedido. Bem-vindo, ' + user.email + '!', true);
+                    window.location.href = 'lista.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found' ? 'Usuário ou senha errados' : error.message;
+                    showMessage('Erro de login: ' + errorMessage, false);
+                });
+        }
+    } else {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() => {
+                return firebase.auth().signInWithEmailAndPassword(email, password);
+            })
+            .then((userCredential) => {
+                const user = userCredential.user;
+                showMessage('Login bem-sucedido. Bem-vindo, ' + user.email + '!', true);
+                window.location.href = 'lista.html';
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found' ? 'Usuário ou senha errados' : error.message;
+                showMessage('Erro de login: ' + errorMessage, false);
+            });
+    }
 }
-
 // Função para redefinir a senha
 function resetPassword() {
     const email = document.getElementById('resetPasswordEmail').value;
