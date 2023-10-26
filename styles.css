@@ -36,36 +36,31 @@ body {
     align-items: center;
     min-height: 100vh; /* Use 'min-height' para manter a página centralizada mesmo quando o conteúdo é longo. */
 }
-
-
-
-/* ... Seu CSS existente ... */
-
 .form-container {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 350px;
-    padding: 20px;
+    width: 80%; /* Reduz a largura do contêiner para 80% da largura da tela. */
+    padding: 10px; /* Reduz o espaçamento interno para 10px. */
     margin-top: 20px;
 }
 
 .form-title {
     margin: 0;
     padding: 0;
-    font-size: 24px;
+    font-size: 20px; /* Reduz o tamanho da fonte do título para 20px. */
     color: #333;
     margin-bottom: 20px;
 }
 
 .input-field {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 8px; /* Reduz o espaçamento interno dos campos de entrada. */
+    margin: 8px 0; /* Reduz a margem dos campos de entrada. */
     border: none;
     border-bottom: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 14px; /* Reduz o tamanho da fonte dos campos de entrada para 14px. */
     outline: none;
 }
 
@@ -73,18 +68,23 @@ body {
     background-color: #3498db;
     color: #fff;
     border: none;
-    padding: 12px 20px;
+    padding: 10px 16px; /* Reduz o preenchimento do botão. */
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
+    font-size: 14px; /* Reduz o tamanho da fonte do botão para 14px. */
+    margin-top: 16px; /* Reduz o espaço superior do botão. */
     transition: background-color 0.3s;
 }
 
-.btn-primary:hover {
-    background-color: #2980b9;
+.btn-link {
+    color: #4285F4;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px; /* Reduz o tamanho da fonte dos links para 14px. */
+    margin-top: 8px; /* Reduz o espaço superior dos links. */
+    display: inline-block;
+    transition: color 0.3s;
 }
-
 .form-label {
     font-size: 14px;
     color: #4285F4;
@@ -100,13 +100,12 @@ body {
 
 .input-field {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 5px; /* Reduza o espaçamento interno dos campos de entrada. */
+    margin: 10px 0; /* Reduza a margem dos campos de entrada. */
     border: none;
-    border-bottom: 1px solid #ccc;
-    font-size: 16px;
+    border-bottom: 2px solid #ccc;
+    font-size: 12px; /* Reduza o tamanho da fonte dos campos de entrada para 12px. */
     outline: none;
-    transition: border-bottom 0.3s, transform 0.3s;
 }
 
 .input-field:focus {
