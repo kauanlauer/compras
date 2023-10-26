@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (itemInputValue !== "") {
             const item = {
                 name: itemInputValue,
-                quantity: "", // Deixar em branco
-                price: "",    // Deixar em branco
+                quantity: "",
+                price: "",
                 purchased: false
             };
 
@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             item.purchased = !item.purchased;
             updatePurchasedStyle(markAsPurchasedButton, item.purchased);
             markAsPurchasedButton.textContent = item.purchased ? "✔✔" : "✔";
+            calcularTotal();
             salvarLista();
         });
 
@@ -104,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const quantity = parseFloat(quantityInput.value) || 1;
             const price = parseFloat(priceInput.value) || 0;
 
-            if (!item.purchased) {
+            if (item.querySelector(".mark-as-purchased").textContent === "✔✔") {
                 total += quantity * price;
             }
         });
