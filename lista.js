@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <span class="item-name">${item.name}</span>
             <input type="number" step="1" placeholder="Qtd" class="quantity-input" value="${item.quantity}">
             <input type="number" step="0.01" placeholder="R$" class="price-input" value="${item.price}">
-            <button class="mark-as-purchased">${item.purchased ? "Comprado" : "Comprar"}</button>
+            <button class="mark-as-purchased">${item.purchased ? "✔✔" : "✔"}</button>
         `;
 
         itemList.appendChild(listItem);
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         markAsPurchasedButton.addEventListener("click", function () {
             item.purchased = !item.purchased;
             updatePurchasedStyle(markAsPurchasedButton, item.purchased);
-            markAsPurchasedButton.textContent = item.purchased ? "Comprado" : "Comprar";
+            markAsPurchasedButton.textContent = item.purchased ? "✔✔" : "✔";
             salvarLista();
         });
 
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const itemName = item.querySelector(".item-name").textContent;
             const itemQuantity = item.querySelector(".quantity-input").value || 1;
             const itemPrice = item.querySelector(".price-input").value || 0;
-            const isPurchased = item.querySelector(".mark-as-purchased").textContent === "Comprado";
+            const isPurchased = item.querySelector(".mark-as-purchased").textContent === "✔✔";
 
             items.push({ name: itemName, quantity: itemQuantity, price: itemPrice, purchased: isPurchased });
         });
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updatePurchasedStyle(button, isPurchased) {
         if (isPurchased) {
-            button.style.backgroundColor = "red";
+            button.style.backgroundColor = "green";
         } else {
             button.style.backgroundColor = "blue";
         }
