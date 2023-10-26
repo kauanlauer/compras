@@ -102,12 +102,12 @@ span.item-name {
 
 .quantity-input,
 .price-input {
-    width: 15px;
+    width: 25px;
     padding: 8px;
     border: none;
     border-bottom: 2px solid #007bff;
     font-family: Arial, sans-serif;
-    font-size: 10px; /* Tamanho da fonte das quantidades e preços para dispositivos móveis */
+    font-size: 12px; /* Tamanho da fonte das quantidades e preços para dispositivos móveis */
     background-color: transparent;
     outline: none;
 }
