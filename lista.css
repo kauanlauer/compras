@@ -103,7 +103,7 @@ span.item-name {
 .quantity-input,
 .price-input {
     width: 25px;
-    padding: 8px;
+    padding: 5px;
     border: none;
     border-bottom: 2px solid #007bff;
     font-family: Arial, sans-serif;
